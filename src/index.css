@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+}
+
+:root {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #fdfdfd;
+  --card-foreground: #000000;
+  --muted: #f4f4f4;
+  --muted-foreground: #666666;
+  --border: #e5e5e5;
+  --primary: #c5a021;
+  --accent: #f4f4f4;
+  --grid-color: rgba(0, 0, 0, 0.025);
+}
+
+:root.dark {
+  color-scheme: dark;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+  --muted: #111111;
+  --muted-foreground: #888888;
+  --border: rgba(255, 255, 255, 0.05);
+  --primary: #d4af37;
+  --accent: #111111;
+  --grid-color: rgba(255, 255, 255, 0.025);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ── Adaptive Logo Filter ── */
+.adaptive-logo {
+  transition: filter 0.3s ease;
+}
+
+:root:not(.dark) .adaptive-logo {
+  /* Invert and apply primary color filter (approximate gold #c5a021) */
+  filter: brightness(0) saturate(100%) invert(64%) sepia(85%) saturate(354%) hue-rotate(5deg) brightness(91%) contrast(92%);
+}
+
+/* Custom scrollbars inside Tailwind */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+/* Custom fade-in and glow animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Hide scrollbar utility class */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Ensure inputs, select boxes, and textareas adapt to light mode */
+:root:not(.dark) input,
+:root:not(.dark) select,
+:root:not(.dark) textarea {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+:root:not(.dark) input::placeholder,
+:root:not(.dark) textarea::placeholder {
+  color: #666666;
+}
